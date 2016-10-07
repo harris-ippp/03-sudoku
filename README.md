@@ -32,7 +32,7 @@ At this point, you have a largely solved puzzle, with a certain number of possib
 
 ## A Final Word 
 
-Others have come before you, proposing solutions to this problem.  There are many solutions on the interwebs that did not ultimately gain widespread adoption, because their proponents did not have the tenacity and policy chops of students at the Harris School of Public Policy.  For instance, you could find this unreadable mess
+Others have come before you, proposing solutions to this problem.  There are many solutions on the interwebs that did not ultimately gain widespread adoption, because their proponents did not have the tenacity and policy chops of students at the Harris School of Public Policy.  For instance, you could find [this](http://blog.davidsingleton.org/sudoku/) unreadable mess
 
 ```
 def r(a):
