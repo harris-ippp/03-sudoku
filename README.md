@@ -32,7 +32,18 @@ At this point, you have a largely solved puzzle, with a certain number of possib
 
 ## A Final Word 
 
-Others have come before you, proposing solutions to this problem.  There are many solutions on the interwebs that did not ultimately gain widespread adoption, because their proponents did not have the tenacity and policy chops of students at the Harris School of Public Policy.  Consider their solutions if you like, but the final code must be yours.  Given the skeleton, I'm asking for a somewhat specific format.  
+Others have come before you, proposing solutions to this problem.  There are many solutions on the interwebs that did not ultimately gain widespread adoption, because their proponents did not have the tenacity and policy chops of students at the Harris School of Public Policy.  For instance, you could find this unreadable mess
+
+```
+def r(a):
+ i=a.find('0')
+ if i<0:print a
+ [m in[(i-j)%9*(i/9^j/9)*(i/27^j/27|i%9/3^j%9/3)or a[j]for
+j in range(81)]or r(a[:i]+m+a[i+1:])for m in`14**7*9`]
+r(raw_input())
+```
+
+Consider their solutions if you like, but the final code must be yours.  Given the skeleton, I'm asking for a somewhat specific format.  
 
 The solutions are due October 19 at 1:30am.
 
