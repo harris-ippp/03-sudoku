@@ -22,9 +22,11 @@ The first item of business is to eliminate the possibilities from each unassigne
 
 ## Recursion or Other Strategies
 
-As a next step, you may assign a cell a value, if it is the only cell in its row, column, or box to contain that value.
+As a next step, you may assign a cell a value, if it is the only cell in its row, column, or box to contain that value.  Adding in this additional step, you should be able to solve about half of the harder puzzles.
 
 There then follows a long list of repulsive "coping mechanisms" for this addiction; see [Sudoku Dragon](http://www.sudokudragon.com/sudokustrategy.htm).  You _may_ use any of these if you want, but at this juncture I would make a suggestion: try random assignment.
+
+Your goal is to solve more than 90\% of the harder puzzles.  The recursion strategy will work 100% of the time.
 
 ### Random Assignment and Recursion
 
