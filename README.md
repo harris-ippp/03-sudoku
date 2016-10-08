@@ -10,7 +10,7 @@ You will work in teams of up to three (marked on your homework), and submit to a
 
 ## The Sudoku Problem
 
-At stake are 81 squares arranged in a 9×9 grid.  The conceit is that (a) each row must contain the numbers 1 through 9, (b) so too must each column, and lastly (c) each of the 9 3×3 blocks (see drawing) must as well.  The challenge is to identify numbers that satisfy (a-c) given a partially completed puzzle.  I have a collected a number of puzzles -- some easier (`sudoku_easier.txt`) and others more fiendish (`sudoku_harder.txt`) -- as test cases for your algorithms.
+At stake are 81 squares arranged in a 9×9 grid.  The conceit is that (a) each row must contain the numbers 1 through 9, (b) so too must each column, and lastly (c) likewise for each of the 9 3×3 blocks.  The challenge is to identify numbers that satisfy (a-c) given a partially completed puzzle.  I have a collected a number of puzzles -- some easier (`sudoku_easier.txt`) and others more fiendish (`sudoku_harder.txt`) -- as test cases for your algorithms.
 
 ## Implementing the Problem
 
