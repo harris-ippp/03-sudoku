@@ -4,7 +4,7 @@
 
 We've all seen the crumpled magazine pages, lacerated by markings and desperate unmarkings.  Many of us have watched family members succumb to this "pastime" before abandoning hope when time runs out on their "flight."  Some of you may even have experimented with this 9 by 9 matrix, this cage, this trap.
 
-Yet Sudoku is very much a solvable problem.  In this mission, you will endeavor to rid the world of this menace, providing humanity with a definitive solution for the "Sudoku Issue."  In so doing, we will improve workers' productivity, unburden the elderly, remove excuses for human contact on long flights, and save trees.  The cause is great; our resolve is strong!
+Yet Sudoku is very much a solvable problem.  In this mission, you will endeavor to rid the world of this menace, providing humanity with a definitive solution for the "Sudoku Issue."  In so doing, we will improve workers' productivity, unburden the elderly, remove excuses for avoiding human contact on long flights, and save trees.  The cause is great; our resolve is strong!
 
 You will work in teams of up to three (marked on your homework), and submit to a common repository.  If you decide to go it alone, you may -- the cost is just that you have to do all of the work.  I encourage you to use Piazza to find partners if need be.
 
