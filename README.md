@@ -18,10 +18,10 @@ Each puzzle consists of a list of 81 single-digit numbers (0-9), where 0 represe
 It will be useful for you to maintain a list or a `set` (like a list, but unique) 
 of the unassigned digits in each row, column, and box.
 
-(Alternatively, you could retain a list of the remaining possibilities in every square, 
+(Alternatively, you could retain a list of the remaining possibilities in every square;
   this would work just as well, but below I give some hints for the unassigned row/col/box strategy.)
 
-## Not All Sudoku Are Created Alike
+## Not All Sudoku Are Created Equal
 
 The first item of business is to assign values to initially empty squares.
 You can do this by considering the unassigned possibilites for the row, column, and box corresponding to that cell.
