@@ -10,7 +10,7 @@ You will work in teams of up to three (marked on your homework), and submit to a
 
 ## The Sudoku Problem
 
-At stake is are 81 squares arranged in a 9×9 grid.  The conceit is that (a) each row must contain the numbers 1 through 9, (b) each column must as well, and (c) each of the 9 3×3 blocks (see drawing) must as well.  The challenge is to identify numbers that satify (a-c) given a partially completed puzzle.  I have a collected a number of puzzles -- some easier (`sudoku_easier.txt`) and others more fiendish (`sudoku_harder.txt`) -- as test cases for your algorithms.
+At stake is are 81 squares arranged in a 9×9 grid.  The conceit is that (a) each row must contain the numbers 1 through 9, (b) each column must as well, and (c) each of the 9 3×3 blocks (see drawing) must as well.  The challenge is to identify numbers that satisfy (a-c) given a partially completed puzzle.  I have a collected a number of puzzles -- some easier (`sudoku_easier.txt`) and others more fiendish (`sudoku_harder.txt`) -- as test cases for your algorithms.
 
 ## Implementing the Problem
 
@@ -71,6 +71,8 @@ As a next step, you could consider assigning a value to a cell
    if it is the only cell in its column, row, or box to have that possibility.
 
 There then follows a long list of tortured "coping mechanisms" for this addiction; see [Sudoku Dragon](http://www.sudokudragon.com/sudokustrategy.htm).  You _may_ use any of these if you want, but at this juncture I would make a suggestion: try random assignment.
+
+**Your goal is to solve more than 40% of the harder puzzles.  The recursion strategy will work 100% of the time.**
 
 ### Random Assignment and Recursion
 
@@ -133,7 +135,18 @@ You can signal whether to back-track or continue onwards by returning `False` or
 
 ## A Final Word 
 
-Others have come before you, proposing solutions to this problem.  There are many solutions on the interwebs that did not ultimately gain widespread adoption, because their proponents did not have the tenacity and policy chops of students at the Harris School of Public Policy.  Consider their solutions if you like, but the final code must be yours.  Given the skeleton, I'm asking for a somewhat specific format.  
+Others have come before you, proposing solutions to this problem.  There are many solutions on the interwebs that did not ultimately gain widespread adoption, because their proponents did not have the tenacity and policy chops of students at the Harris School of Public Policy.  For instance, you could find [this](http://blog.davidsingleton.org/sudoku/) unreadable mess
+
+```
+def r(a):
+ i=a.find('0')
+ if i<0:print a
+ [m in[(i-j)%9*(i/9^j/9)*(i/27^j/27|i%9/3^j%9/3)or a[j]for
+j in range(81)]or r(a[:i]+m+a[i+1:])for m in`14**7*9`]
+r(raw_input())
+```
+
+Consider their solutions if you like, but the final code must be yours. 
 
 The solutions are due October 19 at 1:30am.
 
