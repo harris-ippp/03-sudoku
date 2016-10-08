@@ -14,21 +14,122 @@ At stake is are 81 squares arranged in a 9×9 grid.  The conceit is that (a) eac
 
 ## Implementing the Problem
 
-Each puzzle consists of a list of 81 single-digit numbers (0-9), where 0 represents unassigned values.  It will be useful for you also to retain a list of the remaining possibilities in every square.
+Each puzzle consists of a list of 81 single-digit numbers (0-9), where 0 represents unassigned values.
+It will be useful for you to maintain a `set` (like a list, but unique) of the unassigned digits in each row, column, and box.
+
+(Alternatively, you could retain a list of the remaining possibilities in every square, 
+  this would work just as well, but below I give some hints for the 'unassigned' strategy.)
 
 ## Not All Sudoku Are Created Alike
 
-The first item of business is to eliminate the possibilities from each unassigned squares, based on the contents of their respective rows, columns, and blocks.  When a cell has only a single possibility left, assign it that value.  Simply following this procedure repeatedly should be enough to solve all of the "easier" puzzles.
+The first item of business is to assign values to initially empty squares.
+You can do this by taking considering the possibilities for that cell's row, column, and box.
+If there is a single value that is possible in all three (that lies in the _intersection of the sets_, 
+    assign that cell to that value.
+For example, if a a cell's row does has not assigned possitions for `{2, 4, 6, 7}`,
+    the column has not assigned values for `{4, 5, 6, 7}`,
+    the box has assigned values for all by `{2, 7, 8, 9}`
+    then the only possible value fo the cell is `7`.
+On the other hand, if there are more than one possible values, you hold tight for a moment.
+By following this sequence repeatedly (`while`),
+    looping (`for`) over all the cells in the puzzle (`for`),
+    you can progressively fill in all of the cells.
+
+This iterative procedure is enough to solve all of the "easier" puzzles.
+
+Take some time to discuss _how_ to solve the problem first.
+It will be much easier to write, if you know what you want.
+
+<details>
+<summary>Suggested methods.</summary>
+
+You may solve this any way you like, but here are some suggested functions to implement.
+* `__init__()`: Make a class.  In the `__init__()` function, accept a string and turn it into an 81-item list.
+   This will be easier to manipulate.  You could also make lists of the unassigned possibilities in each row, column, and box.
+   Start with sets or lists containing 1-9, and `remove()` the value that are already assigned.
+   This could also live in another method that you call at this point.
+* `__str__()`: Defining a nice `__str__()` method will allow you to just call `print(puzzle)` 
+   or `print(self)` from with the class.  This will probably help you to debug.
+* `get_box()`: Given the cell index, it's pretty easy to figure out the row (`cell // 9`) 
+   or column (`cell % 9`).  The box is a little trickier.  Write the method once, check it carefully, 
+   and call it when you need it.
+* `assign_cell()`: Set a cell of the puzzle from 0 to a value, and remove it from the unassigned sets
+  for its row, column, and block.
+* `assign()`: Call `assign_cell()` or similar in two loops: one over the entire puzzle until you
+  can't make any more assignments, and an inner `for` loop over all of the cells.
+  You should probably `continue` to skip the already-assigned values...
+* `verify_solution()`: Write a method to check your solution.  Try to check three conditions:
+   1. The initial values should all be there.  To check this, you'd need to somehow save a copy
+      of the initial state of the puzzle, before you started working on it.
+   2. There should be no zeroes left in the puzzle.
+   3. Every row, column, and box should have exactly one of the digits 1-9.
+</details>
 
 ## Recursion or Other Strategies
 
-As a next step, you may assign a cell a value, if it is the only cell in its row, column, or box to contain that value.
+As a next step, you could consider assigning a value to a cell
+   if it is the only cell in its column, row, or box to have that possibility.
 
-There then follows a long list of repulsive "coping mechanisms" for this addiction; see [Sudoku Dragon](http://www.sudokudragon.com/sudokustrategy.htm).  You _may_ use any of these if you want, but at this juncture I would make a suggestion: try random assignment.
+There then follows a long list of tortured "coping mechanisms" for this addiction; see [Sudoku Dragon](http://www.sudokudragon.com/sudokustrategy.htm).  You _may_ use any of these if you want, but at this juncture I would make a suggestion: try random assignment.
 
 ### Random Assignment and Recursion
 
-At this point, you have a largely solved puzzle, with a certain number of possibilities in each box.  When you can't get any further on the possibilities above, create a new puzzle, assigning the box to one of its possibilities, and trying to solve that one.  If that works (you get a solution), great.  If it doesn't, try assigning another of the possibilities.  If that works great.  If you need to try assignment on another box, do so!
+At this point, you have a largely solved puzzle, with a certain number of possibilities in each box.
+Proceed to the first unassigned box, 
+    assign it to one of its possibilities,
+    and remove that possibility from its row, column, and box.
+Continue on to the next empty/non-assigned cell, and assign _it_ to one of _its_ possibilities, and so forth
+
+Repeatedly calling a method, deeper and deeper within itself, is called _recursion_; we'll call this method `recurse()`.
+The first time that you find a box without any possibilities, you've found a contradiction.
+So then `recurse()` has to backtrack -- _unassigning_ the value
+  (and adding back in the possibility for the row, column, and box).
+You can signal whether to back-track or continue onwards by returning `False` or `True`.
+
+<details>
+<summary>More hints.</summary>
+
+* `unassign_cell()`: This is simply the 'inverse' of the `assign_cell()` function above.
+  You'll need to call it when recursion on a single option fails.
+* `recurse()`: This function needs to do three things in a loop: 
+  assign one of the test cases, try going deeper, and returning false
+  if there are no possibilities in an empty cell.
+  
+  ```
+  def recurse(self):
+  
+    # Loop over all the cells.
+    for cell in range(81):
+  
+      # if it's assigned, keep going
+      if self.puzzle[cell]: continue
+  
+      for poss in self.cell_possibilities(cell):
+  
+        # Assign the cell
+        self.assign_cell(cell, poss)
+  
+        # continue deeper in the recursion.
+        if self.recurse(): return True
+  
+        # If this choice failed -- 
+        # at some point there were no options,
+        # then we have a contradiction.
+        # Unassign the cell and revert the 
+        # possibilities, and try the next one.
+        self.unassign_cell(cell)
+  
+      # When there is no possible value,
+      # we have a contradiction, 
+      # and use unassign to back up.
+      return False
+  
+    # until we fall off the end.
+    return self.verify_solution()
+  ```
+
+</details>
+
 
 ## A Final Word 
 
