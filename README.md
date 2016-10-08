@@ -1,4 +1,4 @@
-# tl;dr Solve Sudoku
+# tl;dr: Solve Sudoku
 
 # Solving the Sudoku Issue
 
