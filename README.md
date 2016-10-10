@@ -138,6 +138,12 @@ You can signal whether to back-track or continue onwards by returning `False` or
 
 </details>
 
+## Creating Your Task Force
+
+One member of each team should accept the assignment.  You can then add Collaborators under "Settings" and "Collaborators & teams" for your imported repositories.  To accept the assignment, go here:
+
+https://classroom.github.com/assignment-invitations/acb6c296950cc73142b3ba923b8a35fc
+
 
 ## A Final Word 
 
