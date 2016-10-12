@@ -23,9 +23,17 @@ class sudoku():
 
   def __str__(self):
 
-    return "My great sudoku puzzle: " + str(self.puzzle)
-
-
+    s = "\n+---+---+---+"
+    for b in range(3):
+      for r in range(3):
+        s += "\n|"
+        for c in range(3):
+          s += "".join([str(v) for v in self.puzzle[b*27+r*9+c*3:b*27+r*9+c*3+3]]) + "|"
+      s += "\n+---+---+---+"
+        
+    return s
+  
+  
   def verify_solution(self): # verifying is easy!!
   
     print("Could be!  Let's just say yes!!")
