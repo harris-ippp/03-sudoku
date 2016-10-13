@@ -21,15 +21,20 @@ class sudoku():
     return "".join(str(x) for x in self.puzzle) + "\n"
 
 
+  # Print method, hopefully makes it
+  # it easier to understand and grapple
+  # with the algorithm.
   def __str__(self):
 
     s = "\n+---+---+---+"
-    for b in range(3):
-      for r in range(3):
+    for block in range(3): # for each horizontal block
+      for row in range(3): # for each row
         s += "\n|"
-        for c in range(3):
-          s += "".join([str(v) for v in self.puzzle[b*27+r*9+c*3:b*27+r*9+c*3+3]]) + "|"
-      s += "\n+---+---+---+"
+        for col in range(3): # for each vertical block
+          # Horrible?  Perhaps: adding three characters 
+          # at a time, to the strings, followed by a pipe.
+          s += "".join([str(v) for v in self.puzzle[block*27+row*9+col*3:block*27+row*9+col*3+3]]) + "|"
+      s += "\n+---+---+---+" # after every full block, a line.
         
     return s
   
@@ -79,6 +84,8 @@ with open("sudoku_solved_easier.txt", "w") as out:
     p = line.strip()
     s = sudoku(p)
     s.assign()
+    # print(s)
+    # break
 
     total += 1
     if s.verify_solution(): solved += 1
