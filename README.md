@@ -35,7 +35,7 @@ On the other hand, if there are multiple possible values, hold tight for a momen
 By following this sequence repeatedly (`while`),
     looping (`for`) over all the cells in the puzzle (`for`),
     you can progressively fill in all of the cells.
-
+    
 This iterative procedure is enough to solve all of the "easier" puzzles.
 
 **The solution format will be files containing the same puzzles as `sudoku_easier.txt` and `sudoku_harder.txt`,
@@ -43,6 +43,32 @@ This iterative procedure is enough to solve all of the "easier" puzzles.
 
 Take some time to discuss _how_ to solve the problem first, with your group.
 It will be much easier to write, if you know what you want.
+
+<details>
+<summary>The algorithm in greater detail, and some suggestions.</summary>
+
+Do this _one step at a time_ -- no one should write this in one go.  Split it up, assigning pieces to each member of the group.
+
+_Start by looking at a single puzzle: put a `print(s)` and `break` statement after creating the first puzzle, at the end of the code._
+
+Use `print()` like the Dickens.  This is an intuitive project, and I've provided you with a `print()` function.  Print out the possibilities in every column, row, and block, for a single puzzle.  Check that they're right.
+
+Now print out the "free" column, row, and block sets for every puzzle.  It should be the inverse of above.
+
+Now print out the "cell possibilities" for every cell. 
+
+* There are a lot of ways of solving sudoku, but they all come down to identifying cells where only a single possibility remains.
+* So how do you identify a possibility?  It is the intersection of the possibilities remaining in that cell's row, column, and box.
+* What are the possibilities in the row, column, and box?  It is the numbers 1-9, removing the ones that are already there.
+* So you need to create lists of unassigned values -- initially, 1-9 -- and loop over the cells in your entire puzzle.  Whenever a value is non-zero (`if self.puzzle:`), you remove it from the row, column, and box possibilities.  (Suggestion: assign one person in the group to each of rows, columns, and blocks.  Then integrate your code together.)
+* Build this up one step at a time: row, then column, then box.  Print them all out.  Do they look correct?  This should all go in `__init__()`.
+* Consider the intersection of the row, column, and box possibilities (`a.intersection(b, c)`, or `a & b & c`) for a specific cell.  This should be the list of numbers still possible for that cell (`cell_possibilities()`).
+* Loop over the entire puzzle, asking for each cell, if there is exactly one possibility that lies in the intersection (`assign()`).
+* Whenever you have exactly one possibility one possibility, assign `self.puzzle[cell]` to that single possibility, and remove that possibility from the column, row and block (`assign_cell()`).
+* You'll proceed over the entire puzzle, asking the same question.  In the first pass, you won't assign all of the cells, but you'll assign some.  In the next pass you'll assign more.
+* For the easier puzzles, by repeating until no more assignments can be made (or until `0` is no longer present in `self.puzzle`), you return.
+
+</details>
 
 <details>
 <summary>Suggested methods.</summary>
@@ -59,11 +85,11 @@ You may solve this any way you like, but here are some suggested functions to im
 * `get_box()`: Given the cell index, it's pretty easy to figure out the row (`cell // 9`) 
    or column (`cell % 9`).  The box is a little trickier.  Write the method once, check it carefully, 
    and call it when you need it.
-* `assign_cell()`: Set a cell of the puzzle from 0 to a value, and remove it from the unassigned lists or sets
-  for its row, column, and block.
+* `cell_possibilities()`: This should simply return the intersection of the row, column, and box possibilities for a given cell.  Test this carefully!
 * `assign()`: Call `assign_cell()` or similar in two nested loops: an outer loop over the entire puzzle 
   (terminating when you can't make any more assignments), and an inner `for` loop over all of the cells.
-  Use `continue` to skip the already-assigned values...
+  Use `continue` to skip the already-assigned values.  For every cell in the puzzle, query the `cell_possibilities()`.  If you find that there is exactly one possibility left, `assign_cell()` to that possibility.
+* `assign_cell()`: Set a cell of the puzzle from 0 to a value, and remove it from the unassigned lists or sets for its row, column, and block.
 * `verify_solution()`: Write a method to check your solution.  Try to check three conditions:
    1. The initial values should all be there.  To check this, you'd need to somehow save a copy
       of the initial state of the puzzle, before you started working on it.
