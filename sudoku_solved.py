@@ -177,20 +177,6 @@ class sudoku():
     return self.verify_solution()
 
 
-for line in open("sudoku_plane.txt"):
-
-  p = line.strip()
-  s = sudoku(p)
-  s.assign()
-  s.recurse()
-
-  s.verify_solution()
-
-  print(s)
-
-
-sys.exit()
-
 solved, total = 0, 0
 with open("sudoku_solved_easier.txt", "w") as out:
   for line in open("sudoku_easier.txt"):
